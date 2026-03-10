@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Health Detection – AgriConnect</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-brand">🌾 Agri<span>Connect</span></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="about.html"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="crop.html"><i class="fa fa-seedling"></i> Crop Rec.</a></li>
+      <li><a href="weather.html"><i class="fa fa-cloud-sun"></i> Weather</a></li>
+      <li><a href="calendar.html"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+      <li><a href="resource.html"><i class="fa fa-tint"></i> Resources</a></li>
+      <li><a href="purchase.html"><i class="fa fa-shopping-cart"></i> Purchase</a></li>
+      <li><a href="crop-health.html"><i class="fa fa-leaf"></i> Crop Health</a></li>
+      <li><a href="language.html"><i class="fa fa-globe"></i> Language</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>🔬 Crop Health Detection</h1>
+    <p>Upload a photo of your crop leaf for instant AI-powered disease analysis</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+
+        <!-- LEFT: UPLOAD FORM -->
+        <div>
+          <div class="form-card">
+            <h2 style="font-family:var(--font-display);color:var(--green-dark);margin-bottom:0.5rem;">
+              Upload Crop Image
+            </h2>
+            <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:1.5rem;">
+              Take a clear close-up photo of the affected leaf. Ensure good lighting for accurate results.
+            </p>
+
+            <div id="health-alert" class="alert"></div>
+
+            <form id="health-form" method="POST" action="backend/upload_crop_image.php" enctype="multipart/form-data">
+
+              <!-- DRAG & DROP UPLOAD ZONE -->
+              <div class="upload-zone" onclick="document.getElementById('crop-image-input').click()">
+                <input type="file" id="crop-image-input" name="crop_image" accept="image/*" />
+                <div class="upload-icon">📷</div>
+                <h3>Click or Drag & Drop Image</h3>
+                <p>Supported formats: JPG, PNG, WEBP (max 5MB)</p>
+              </div>
+
+              <!-- IMAGE PREVIEW -->
+              <img id="preview-img" alt="Crop image preview" />
+
+              <div class="form-group" style="margin-top:1.5rem;">
+                <label>Crop Type</label>
+                <select name="crop_type" required>
+                  <option value="">-- Select Crop --</option>
+                  <option value="rice">Rice / Paddy</option>
+                  <option value="wheat">Wheat</option>
+                  <option value="maize">Maize / Corn</option>
+                  <option value="cotton">Cotton</option>
+                  <option value="soybean">Soybean</option>
+                  <option value="tomato">Tomato</option>
+                  <option value="potato">Potato</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Symptom Description (Optional)</label>
+                <textarea name="symptom_desc" placeholder="Describe what you observe: e.g., yellow spots on leaves, wilting, brown patches..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Farmer Name</label>
+                <input type="text" name="farmer_name" placeholder="Your name (for records)" />
+              </div>
+
+              <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">
+                <i class="fa fa-search"></i> Upload & Analyze
+              </button>
+            </form>
+          </div>
+
+          <!-- ANALYSIS RESULT BOX -->
+          <div class="result-box" id="health-result" style="margin-top:1.5rem;">
+            <!-- Populated by JS after upload -->
+          </div>
+        </div>
+
+        <!-- RIGHT: DISEASE GUIDE -->
+        <div>
+          <span class="section-label">Disease Guide</span>
+          <h2 style="font-family:var(--font-display);color:var(--green-dark);margin-bottom:1.5rem;">
+            Common Crop Diseases
+          </h2>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:1.8rem;min-width:40px;">🍂</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Leaf Blight</h4>
+                  <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.4rem;">Water-soaked spots turning brown. Spreads rapidly in humid conditions.</p>
+                  <p style="font-size:0.83rem;color:var(--green-mid);"><strong>Treatment:</strong> Mancozeb spray + remove infected leaves</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:1.8rem;min-width:40px;">⬜</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Powdery Mildew</h4>
+                  <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.4rem;">White powdery coating on leaves. Common in dry weather with cool nights.</p>
+                  <p style="font-size:0.83rem;color:var(--green-mid);"><strong>Treatment:</strong> Sulfur spray + reduce humidity + improve air flow</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:1.8rem;min-width:40px;">🟡</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Yellow Mosaic Virus</h4>
+                  <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.4rem;">Yellow-green mosaic pattern on leaves. Transmitted by whiteflies.</p>
+                  <p style="font-size:0.83rem;color:var(--green-mid);"><strong>Treatment:</strong> Control whiteflies with Imidacloprid + remove infected plants</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:1.8rem;min-width:40px;">🟤</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Root Rot</h4>
+                  <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.4rem;">Roots turn brown/black and decay. Caused by waterlogging and fungal infection.</p>
+                  <p style="font-size:0.83rem;color:var(--green-mid);"><strong>Treatment:</strong> Improve drainage + Trichoderma bio-fungicide soil drench</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:1.8rem;min-width:40px;">🟠</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Rust Disease</h4>
+                  <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.4rem;">Orange/rust-colored pustules on leaves. Spreads rapidly in cool, moist weather.</p>
+                  <p style="font-size:0.83rem;color:var(--green-mid);"><strong>Treatment:</strong> Propiconazole + Tebuconazole fungicide spray</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TIPS BOX -->
+          <div style="margin-top:1.5rem;background:var(--green-bg);border-radius:var(--radius-md);padding:1.5rem;">
+            <h3 style="font-family:var(--font-display);color:var(--green-dark);margin-bottom:0.8rem;">📸 Photo Tips</h3>
+            <ul style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.88rem;color:var(--text-mid);">
+              <li>✅ Take photos in natural daylight</li>
+              <li>✅ Capture both sides of the leaf</li>
+              <li>✅ Include stem and roots if affected</li>
+              <li>✅ Use clean lens — wipe before clicking</li>
+              <li>❌ Avoid blurry or dark images</li>
+              <li>❌ Don't include non-plant objects</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-brand">🌾 AgriConnect</div><p class="footer-desc">Empowering farmers with smart technology.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="crop.html">Crop Advice</a></div>
+      <div class="footer-col"><h4>Services</h4><a href="resource.html">Resources</a><a href="purchase.html">Purchase</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="language.html">Language</a></div>
+    </div>
+    <div class="footer-bottom">© 2024 AgriConnect. AI analysis is advisory only. Consult an agronomist for critical decisions.</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

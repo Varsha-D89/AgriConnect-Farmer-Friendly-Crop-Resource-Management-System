@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Recommendation – AgriConnect</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-brand">🌾 Agri<span>Connect</span></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="about.html"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="crop.html"><i class="fa fa-seedling"></i> Crop Rec.</a></li>
+      <li><a href="weather.html"><i class="fa fa-cloud-sun"></i> Weather</a></li>
+      <li><a href="calendar.html"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+      <li><a href="resource.html"><i class="fa fa-tint"></i> Resources</a></li>
+      <li><a href="purchase.html"><i class="fa fa-shopping-cart"></i> Purchase</a></li>
+      <li><a href="crop-health.html"><i class="fa fa-leaf"></i> Crop Health</a></li>
+      <li><a href="language.html"><i class="fa fa-globe"></i> Language</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>🌱 Crop Recommendation</h1>
+    <p>Tell us about your soil and season — we'll suggest the best crops for you</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+
+        <!-- LEFT: FORM -->
+        <div>
+          <div class="form-card">
+            <h2 style="font-family:var(--font-display);color:var(--green-dark);margin-bottom:1.5rem;">
+              Enter Farm Details
+            </h2>
+
+            <div id="crop-alert" class="alert"></div>
+
+            <form id="crop-form" method="POST" action="backend/crop_recommendation.php">
+              <div class="form-group">
+                <label for="soil-type"><i class="fa fa-layer-group"></i> Soil Type</label>
+                <select id="soil-type" name="soil_type" required>
+                  <option value="">-- Select Soil Type --</option>
+                  <option value="clay">Clay Soil</option>
+                  <option value="loamy">Loamy Soil</option>
+                  <option value="sandy">Sandy Soil</option>
+                  <option value="black">Black Cotton Soil</option>
+                  <option value="red">Red Laterite Soil</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="season"><i class="fa fa-sun"></i> Farming Season</label>
+                <select id="season" name="season" required>
+                  <option value="">-- Select Season --</option>
+                  <option value="kharif">Kharif (June–October)</option>
+                  <option value="rabi">Rabi (November–March)</option>
+                  <option value="zaid">Zaid (April–June)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="water-availability"><i class="fa fa-tint"></i> Water Availability</label>
+                <select id="water-availability" name="water_availability" required>
+                  <option value="">-- Select Water Level --</option>
+                  <option value="high">High (Irrigated / Canal)</option>
+                  <option value="medium">Medium (Borewell / Tank)</option>
+                  <option value="low">Low (Rainfed Only)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="region"><i class="fa fa-map-marker-alt"></i> Region (Optional)</label>
+                <input type="text" id="region" name="region" placeholder="e.g., Karnataka, Punjab, MP" />
+              </div>
+
+              <div class="form-group">
+                <label for="land-size"><i class="fa fa-ruler-combined"></i> Land Size (Acres)</label>
+                <input type="number" id="land-size" name="land_size" placeholder="e.g., 5" min="0.5" step="0.5" />
+              </div>
+
+              <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">
+                <i class="fa fa-seedling"></i> Get Recommendations
+              </button>
+            </form>
+
+            <!-- RESULT BOX -->
+            <div class="result-box" id="crop-result">
+              <h3>🌿 Recommended Crops for Your Farm</h3>
+              <p id="result-info"></p>
+              <div class="crop-suggestions" id="result-crops"></div>
+              <div style="margin-top:1.2rem;font-size:0.9rem;color:var(--green-dark);">
+                <strong>💡 Pro Tip:</strong> Choose 2–3 crops and rotate them each season for best soil health.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: INFO CARDS -->
+        <div>
+          <span class="section-label">Soil Guide</span>
+          <h2 style="font-family:var(--font-display);color:var(--green-dark);margin-bottom:1.5rem;">
+            Know Your Soil Type
+          </h2>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:2rem;">🏔️</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Clay Soil</h4>
+                  <p style="font-size:0.88rem;color:var(--text-light);">Heavy, holds water well. Best for rice, sugarcane, wheat. Poor drainage.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:2rem;">🌍</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Loamy Soil</h4>
+                  <p style="font-size:0.88rem;color:var(--text-light);">Ideal balance of sand, silt, clay. Best for most crops. Excellent fertility.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:2rem;">🏜️</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Sandy Soil</h4>
+                  <p style="font-size:0.88rem;color:var(--text-light);">Light, drains fast. Good for groundnut, bajra. Needs frequent watering.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:2rem;">⬛</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Black Cotton Soil</h4>
+                  <p style="font-size:0.88rem;color:var(--text-light);">Rich in minerals, expands when wet. Best for cotton, soybean, sorghum.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding:1.2rem 1.5rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="font-size:2rem;">🔴</span>
+                <div>
+                  <h4 style="color:var(--green-dark);">Red Laterite Soil</h4>
+                  <p style="font-size:0.88rem;color:var(--text-light);">Iron-rich, low in humus. Best for ragi, groundnut, millets.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-brand">🌾 AgriConnect</div><p class="footer-desc">Empowering farmers with smart technology.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="crop.html">Crop Advice</a></div>
+      <div class="footer-col"><h4>Services</h4><a href="resource.html">Resources</a><a href="purchase.html">Purchase</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="language.html">Language</a></div>
+    </div>
+    <div class="footer-bottom">© 2024 AgriConnect. Built for farmers, by farmers.</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

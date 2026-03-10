@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language – AgriConnect</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-brand">🌾 Agri<span>Connect</span></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+    <ul class="nav-links">
+      <li><a href="index.html" id="nav-home"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="about.html" id="nav-about"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="crop.html"  id="nav-crop"><i class="fa fa-seedling"></i> Crop Rec.</a></li>
+      <li><a href="weather.html" id="nav-weather"><i class="fa fa-cloud-sun"></i> Weather</a></li>
+      <li><a href="calendar.html"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+      <li><a href="resource.html"><i class="fa fa-tint"></i> Resources</a></li>
+      <li><a href="purchase.html"><i class="fa fa-shopping-cart"></i> Purchase</a></li>
+      <li><a href="crop-health.html"><i class="fa fa-leaf"></i> Crop Health</a></li>
+      <li><a href="language.html"><i class="fa fa-globe"></i> Language</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1 id="lang-heading">🌐 Select Language</h1>
+    <p id="lang-subtext">Choose your preferred language for the AgriConnect platform</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Multilingual Support</span>
+        <h2>भाषा ಆಯ್ಕೆ · Language Selection</h2>
+        <p>AgriConnect supports English, Kannada, and Hindi to serve farmers across India.</p>
+      </div>
+
+      <!-- LANGUAGE CARDS -->
+      <div class="lang-grid" style="max-width:700px;margin:0 auto 3rem;">
+        <div class="lang-card" data-lang="en" onclick="selectLang(this,'en')">
+          <div class="lang-flag">🇬🇧</div>
+          <div class="lang-name">English</div>
+          <div class="lang-native">English</div>
+        </div>
+
+        <div class="lang-card" data-lang="kn" onclick="selectLang(this,'kn')">
+          <div class="lang-flag">🇮🇳</div>
+          <div class="lang-name">Kannada</div>
+          <div class="lang-native">ಕನ್ನಡ</div>
+        </div>
+
+        <div class="lang-card" data-lang="hi" onclick="selectLang(this,'hi')">
+          <div class="lang-flag">🇮🇳</div>
+          <div class="lang-name">Hindi</div>
+          <div class="lang-native">हिंदी</div>
+        </div>
+      </div>
+
+      <!-- CONFIRMATION MESSAGE -->
+      <div id="lang-confirm" style="display:none;text-align:center;margin-bottom:2rem;">
+        <div style="background:var(--green-bg);border:2px solid var(--green-light);border-radius:var(--radius-md);padding:1.5rem 2rem;display:inline-block;">
+          <p style="font-size:1.1rem;color:var(--green-dark);font-weight:600;" id="lang-confirm-msg">
+            ✅ Language set to English
+          </p>
+        </div>
+      </div>
+
+      <!-- TRANSLATIONS PREVIEW -->
+      <div class="section-header">
+        <span class="section-label">Preview</span>
+        <h2>Key Translations</h2>
+      </div>
+
+      <div style="overflow-x:auto;max-width:800px;margin:0 auto;">
+        <table class="resource-table">
+          <thead>
+            <tr>
+              <th>English</th>
+              <th>ಕನ್ನಡ (Kannada)</th>
+              <th>हिंदी (Hindi)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Home</td><td>ಮುಖಪುಟ</td><td>होम</td></tr>
+            <tr><td>Crop Recommendation</td><td>ಬೆಳೆ ಶಿಫಾರಸು</td><td>फसल सिफारिश</td></tr>
+            <tr><td>Weather</td><td>ಹವಾಮಾನ</td><td>मौसम</td></tr>
+            <tr><td>Farmer</td><td>ರೈತ</td><td>किसान</td></tr>
+            <tr><td>Soil Type</td><td>ಮಣ್ಣಿನ ವಿಧ</td><td>मिट्टी का प्रकार</td></tr>
+            <tr><td>Water</td><td>ನೀರು</td><td>पानी</td></tr>
+            <tr><td>Fertilizer</td><td>ಗೊಬ್ಬರ</td><td>उर्वरक</td></tr>
+            <tr><td>Harvest</td><td>ಕಟಾವು</td><td>फसल काटना</td></tr>
+            <tr><td>Buy Now</td><td>ಈಗ ಖರೀದಿಸಿ</td><td>अभी खरीदें</td></tr>
+            <tr><td>Submit</td><td>ಸಲ್ಲಿಸಿ</td><td>जमा करें</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-brand">🌾 AgriConnect</div><p class="footer-desc">Empowering farmers with smart technology.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="crop.html">Crop Advice</a></div>
+      <div class="footer-col"><h4>Services</h4><a href="resource.html">Resources</a><a href="purchase.html">Purchase</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="language.html">Language</a></div>
+    </div>
+    <div class="footer-bottom">© 2024 AgriConnect. Supporting Indian farmers in their native languages.</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    function selectLang(el, lang) {
+      // Update UI
+      document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+
+      // Save preference
+      localStorage.setItem('agri_lang', lang);
+
+      // Show confirm
+      const msgs = { en: '✅ Language set to English', kn: '✅ ಭಾಷೆ ಕನ್ನಡಕ್ಕೆ ಹೊಂದಿಸಲಾಗಿದೆ', hi: '✅ भाषा हिंदी में सेट कर दी गई है' };
+      document.getElementById('lang-confirm-msg').textContent = msgs[lang];
+      document.getElementById('lang-confirm').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Calendar – AgriConnect</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .filter-btn {
+      padding: 0.5rem 1.3rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--green-mid);
+      color: var(--green-mid);
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: transparent;
+      transition: var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active-filter {
+      background: var(--green-mid);
+      color: var(--white);
+    }
+    .phase-sowing    { border-left-color: #4CAF50; }
+    .phase-fertilize { border-left-color: #FF9800; }
+    .phase-irrigate  { border-left-color: #2196F3; }
+    .phase-harvest   { border-left-color: #F44336; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-brand">🌾 Agri<span>Connect</span></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="about.html"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="crop.html"><i class="fa fa-seedling"></i> Crop Rec.</a></li>
+      <li><a href="weather.html"><i class="fa fa-cloud-sun"></i> Weather</a></li>
+      <li><a href="calendar.html"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+      <li><a href="resource.html"><i class="fa fa-tint"></i> Resources</a></li>
+      <li><a href="purchase.html"><i class="fa fa-shopping-cart"></i> Purchase</a></li>
+      <li><a href="crop-health.html"><i class="fa fa-leaf"></i> Crop Health</a></li>
+      <li><a href="language.html"><i class="fa fa-globe"></i> Language</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>📅 Crop Calendar</h1>
+    <p>Complete farming schedule — sowing, fertilizing, irrigation, and harvesting</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- FILTER BUTTONS -->
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;">
+        <strong style="color:var(--green-dark);margin-right:0.5rem;">Filter by crop:</strong>
+        <button class="filter-btn active-filter" data-filter="all"   onclick="filterCalendar('all')">All Crops</button>
+        <button class="filter-btn" data-filter="rice"   onclick="filterCalendar('rice')">🌾 Rice</button>
+        <button class="filter-btn" data-filter="wheat"  onclick="filterCalendar('wheat')">🌽 Wheat</button>
+        <button class="filter-btn" data-filter="cotton" onclick="filterCalendar('cotton')">☁️ Cotton</button>
+        <button class="filter-btn" data-filter="maize"  onclick="filterCalendar('maize')">🌽 Maize</button>
+        <button class="filter-btn" data-filter="sugarcane" onclick="filterCalendar('sugarcane')">🎋 Sugarcane</button>
+      </div>
+
+      <!-- LEGEND -->
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;"><span style="width:14px;height:14px;background:#4CAF50;border-radius:3px;display:inline-block;"></span>Sowing</span>
+        <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;"><span style="width:14px;height:14px;background:#FF9800;border-radius:3px;display:inline-block;"></span>Fertilizing</span>
+        <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;"><span style="width:14px;height:14px;background:#2196F3;border-radius:3px;display:inline-block;"></span>Irrigation</span>
+        <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;"><span style="width:14px;height:14px;background:#F44336;border-radius:3px;display:inline-block;"></span>Harvesting</span>
+      </div>
+
+      <!-- CALENDAR ITEMS -->
+      <div class="calendar-grid" id="calendar-list">
+
+        <!-- RICE -->
+        <div class="calendar-item phase-sowing" data-crop="rice">
+          <div class="cal-month">JUN<br>—<br>JUL</div>
+          <div class="cal-content">
+            <h4>🌾 Rice – Sowing / Transplanting</h4>
+            <p>Prepare nursery beds in May. Transplant 25-30 day old seedlings. Maintain 5cm standing water. Use certified varieties like IR-64 or Swarna.</p>
+          </div>
+          <span class="cal-badge">Sowing</span>
+        </div>
+
+        <div class="calendar-item phase-fertilize" data-crop="rice">
+          <div class="cal-month">JUL<br>—<br>AUG</div>
+          <div class="cal-content">
+            <h4>🌾 Rice – Fertilizer Application</h4>
+            <p>Apply basal NPK (40:20:20 kg/ha) at transplanting. Top dress with 40 kg N/ha at tillering stage (25-30 days after transplanting).</p>
+          </div>
+          <span class="cal-badge">Fertilizing</span>
+        </div>
+
+        <div class="calendar-item phase-irrigate" data-crop="rice">
+          <div class="cal-month">AUG<br>—<br>SEP</div>
+          <div class="cal-content">
+            <h4>🌾 Rice – Irrigation & Weed Control</h4>
+            <p>Maintain 5-7cm water during tillering. Drain water before panicle emergence. Apply herbicide (Butachlor) at 7-10 days after transplanting.</p>
+          </div>
+          <span class="cal-badge">Irrigation</span>
+        </div>
+
+        <div class="calendar-item phase-harvest" data-crop="rice">
+          <div class="cal-month">NOV<br>—<br>DEC</div>
+          <div class="cal-content">
+            <h4>🌾 Rice – Harvesting</h4>
+            <p>Harvest when 80-85% of grains turn golden. Drain field 10 days before harvest. Moisture content should be 20-22%. Thresh promptly to avoid losses.</p>
+          </div>
+          <span class="cal-badge">Harvesting</span>
+        </div>
+
+        <!-- WHEAT -->
+        <div class="calendar-item phase-sowing" data-crop="wheat">
+          <div class="cal-month">NOV<br>—<br>DEC</div>
+          <div class="cal-content">
+            <h4>🌿 Wheat – Sowing</h4>
+            <p>Sow wheat seeds at 100-125 kg/ha in rows 22.5cm apart. Ideal soil temperature 20-25°C. Varieties: HD-2967, GW-322 for north India.</p>
+          </div>
+          <span class="cal-badge">Sowing</span>
+        </div>
+
+        <div class="calendar-item phase-irrigate" data-crop="wheat">
+          <div class="cal-month">DEC<br>—<br>JAN</div>
+          <div class="cal-content">
+            <h4>🌿 Wheat – Crown Root Irrigation</h4>
+            <p>First irrigation (Crown Root Initiation) at 20-25 days. Critical stage — never miss. Apply 60kg N/ha with this irrigation for best results.</p>
+          </div>
+          <span class="cal-badge">Irrigation</span>
+        </div>
+
+        <div class="calendar-item phase-fertilize" data-crop="wheat">
+          <div class="cal-month">JAN<br>—<br>FEB</div>
+          <div class="cal-content">
+            <h4>🌿 Wheat – Fertilizer Top Dressing</h4>
+            <p>Apply second dose of nitrogen (40 kg N/ha) at tillering stage. Spray micronutrients if yellowing observed. Control aphids with imidacloprid.</p>
+          </div>
+          <span class="cal-badge">Fertilizing</span>
+        </div>
+
+        <div class="calendar-item phase-harvest" data-crop="wheat">
+          <div class="cal-month">MAR<br>—<br>APR</div>
+          <div class="cal-content">
+            <h4>🌿 Wheat – Harvesting</h4>
+            <p>Harvest at physiological maturity (grain hard, golden). Use combine harvester. Target moisture 12-14% for storage. Expected yield: 45-55 quintals/ha.</p>
+          </div>
+          <span class="cal-badge">Harvesting</span>
+        </div>
+
+        <!-- COTTON -->
+        <div class="calendar-item phase-sowing" data-crop="cotton">
+          <div class="cal-month">MAY<br>—<br>JUN</div>
+          <div class="cal-content">
+            <h4>☁️ Cotton – Sowing</h4>
+            <p>Sow after first monsoon rains. Spacing: 90×60 cm for Bt cotton. Treat seeds with thiram before sowing. Use drip irrigation if available.</p>
+          </div>
+          <span class="cal-badge">Sowing</span>
+        </div>
+
+        <div class="calendar-item phase-harvest" data-crop="cotton">
+          <div class="cal-month">OCT<br>—<br>JAN</div>
+          <div class="cal-content">
+            <h4>☁️ Cotton – Picking</h4>
+            <p>Pick cotton bolls when fully open (fluffy white). Multiple pickings every 10-15 days. Avoid picking wet bolls. Store in dry, clean bags.</p>
+          </div>
+          <span class="cal-badge">Harvesting</span>
+        </div>
+
+        <!-- MAIZE -->
+        <div class="calendar-item phase-sowing" data-crop="maize">
+          <div class="cal-month">JUN<br>—<br>JUL</div>
+          <div class="cal-content">
+            <h4>🌽 Maize – Sowing</h4>
+            <p>Sow maize at 20-25 kg seeds/ha. Row spacing 60-75 cm. Ensure soil moisture at sowing. Treat with fungicide to prevent seed rot.</p>
+          </div>
+          <span class="cal-badge">Sowing</span>
+        </div>
+
+        <div class="calendar-item phase-harvest" data-crop="maize">
+          <div class="cal-month">SEP<br>—<br>OCT</div>
+          <div class="cal-content">
+            <h4>🌽 Maize – Harvesting</h4>
+            <p>Harvest at cob maturity (husk dry, silks brown). Dry cobs to 12% moisture before shelling. Expected yield: 35-45 quintals/ha with hybrid varieties.</p>
+          </div>
+          <span class="cal-badge">Harvesting</span>
+        </div>
+
+        <!-- SUGARCANE -->
+        <div class="calendar-item phase-sowing" data-crop="sugarcane">
+          <div class="cal-month">FEB<br>—<br>MAR</div>
+          <div class="cal-content">
+            <h4>🎋 Sugarcane – Planting</h4>
+            <p>Plant 2-3 budded setts in furrows 90 cm apart. Treat setts in carbendazim solution. Apply FYM at 50 tonnes/ha before planting.</p>
+          </div>
+          <span class="cal-badge">Sowing</span>
+        </div>
+
+        <div class="calendar-item phase-harvest" data-crop="sugarcane">
+          <div class="cal-month">NOV<br>—<br>FEB</div>
+          <div class="cal-content">
+            <h4>🎋 Sugarcane – Harvesting</h4>
+            <p>Harvest at 12-14 months age. Cut close to ground. Deliver to mill within 24 hours of harvest. Expected yield: 80-100 tonnes/ha.</p>
+          </div>
+          <span class="cal-badge">Harvesting</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-brand">🌾 AgriConnect</div><p class="footer-desc">Empowering farmers with smart technology.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="crop.html">Crop Advice</a></div>
+      <div class="footer-col"><h4>Services</h4><a href="resource.html">Resources</a><a href="purchase.html">Purchase</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="language.html">Language</a></div>
+    </div>
+    <div class="footer-bottom">© 2024 AgriConnect. Built for farmers, by farmers.</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
